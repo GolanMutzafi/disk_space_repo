@@ -20,7 +20,7 @@ pipeline {
 
                     if (FREESPACE.toFloat() < params.Reqspace.toFloat()) {
                         echo "Not enough free space! Required: ${params.Reqspace}%, Available: ${FREESPACE}%"
-                        build job: 'Jenkinsfile_2', parameters: [
+                        build job: 'Jenkinsfile_2_pipeline', parameters: [
                             string(name: 'FileName', value: 'example.txt'),
                             string(name: 'CoreDump', value: 'CoreDump')
                         ]
