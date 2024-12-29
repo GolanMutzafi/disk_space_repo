@@ -4,7 +4,7 @@ pipeline {
         cron('* * * *')
     }*/
     parameters {
-        string(name: 'Reqspace', defaultValue: '70', description: 'Required free storage space (%)', trim: true)
+        string(name: 'Reqspace', defaultValue: '90', description: 'Required free storage space (%)', trim: true)
     }
     stages {
         stage('storage_test') {
