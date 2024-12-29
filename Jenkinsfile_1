@@ -21,7 +21,7 @@ pipeline {
                     // המרת מחרוזות לערכים מספריים והשוואה
                     if (FREESPACE.toFloat() < params.Reqspace.toFloat()) {
                         echo "Not enough free space! Required: ${params.Reqspace}%, Available: ${FREESPACE}%"
-                        build job: 'Jenkinsfile_2', parameters: [
+                        build job: '/Jenkinsfile_2', parameters: [
                         string(name: 'FileName', defaultValue: 'example.txt', description: 'File name to check', trim: true),
                         string(name: 'CoreDump', defaultValue: 'CoreDump', description: 'String to search in the file', trim: true)
                         ]
