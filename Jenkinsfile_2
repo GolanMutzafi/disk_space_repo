@@ -1,8 +1,8 @@
 pipeline{
     agent any
         parameters {
-        string(name: 'FileName', defaultValue: 'example.txt', description: 'File name to check', trim: true)
-        string(name: 'CoreDump', defaultValue: 'CoreDump', description: 'String to search in the file', trim: true)
+        string(name: 'FileName', defaultValue: 'example.txt')
+        string(name: 'CoreDump', defaultValue: 'CoreDump')
     }
     stages{
         stage('search_string'){
