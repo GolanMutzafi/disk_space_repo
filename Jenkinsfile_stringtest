@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage('search_string'){
             steps{
-                script{//חיפוש המחרוזת
+                script{
                     def search_result = sh(
                         script: "grep '${params.CoreDump}' ${params.FileName} ||true", returnStdout: true).trim()
                         
