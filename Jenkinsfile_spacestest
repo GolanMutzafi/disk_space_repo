@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    /*triggers {
+        cron('* * * *')
+    }*/
+    parameters {
+        string(name: 'Reqspace', defaultValue: '90', description: 'Required free storage space (%)', trim: true)
+    }
+    stages {
+        stage('storage_test') {
+            steps {
+                script {
+                    def FREESPACE = sh(
+                        script: "df / | tail -1 | awk '{print \$4/\$2 * 100}'",
+                        returnStdout: true
+                    ).trim()
+
+                    echo "Required space: ${params.Reqspace}%"
+                    echo "Available space: ${FREESPACE}%"
+
+                    if (FREESPACE.toFloat() < params.Reqspace.toFloat()) {
+                        echo "Not enough free space! Required: ${params.Reqspace}%, Available: ${FREESPACE}%"
+                        build job: 'Jenkinsfile_2_pipeline', parameters: [
+                            string(name: 'FileName', value: 'example.txt'),
+                            string(name: 'CoreDump', value: 'CoreDump')
+                        ]
+                    } else {
+                        echo "Sufficient free space available."
+                    }
+                }
+            }
+        }
+    }
+}

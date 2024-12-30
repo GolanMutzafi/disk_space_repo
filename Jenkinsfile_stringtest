@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+        parameters {
+        string(name: 'FileName', defaultValue: 'example.txt')
+        string(name: 'CoreDump', defaultValue: 'CoreDump')
+    }
+    stages{
+        stage('search_string'){
+            steps{
+                script{//חיפוש המחרוזת
+                    def search_result = sh(
+                        script: "grep '${params.CoreDump}' ${params.FileName} ||true", returnStdout: true).trim()
+                        
+                    if (search_result) {
+                    echo "String '${params.CoreDump}' found in file '${params.FileName}'. Stopping pipeline."
+                } else {
+                    echo "String '${params.CoreDump}' not found in file '${params.FileName}'."
+                    }
+                }
+            }
+        }
+    }
+}
